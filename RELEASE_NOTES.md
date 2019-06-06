@@ -2,6 +2,7 @@
 - New Features
   - `ResultIterable<T>.map(Function<T, U>)` returns a `ResultIterable<U>` with elements transformed
     using the given mapper function.
+  - `@PropagateNull` annotation allows a missing property to indicate a missing compound value
 
 # 3.8.2
 - Improvements
