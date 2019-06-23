@@ -41,6 +41,7 @@ public class SqlArrayTypes implements JdbiConfig<SqlArrayTypes> {
     private SqlArrayTypes(SqlArrayTypes that) {
         factories.addAll(that.factories);
         argumentStrategy = that.argumentStrategy;
+        registry = null;
     }
 
     /**

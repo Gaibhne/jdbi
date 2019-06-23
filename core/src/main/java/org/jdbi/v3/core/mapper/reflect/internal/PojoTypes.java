@@ -30,6 +30,7 @@ public class PojoTypes implements JdbiConfig<PojoTypes> {
 
     private PojoTypes(PojoTypes other) {
         factories.putAll(other.factories);
+        registry = null;
     }
 
     @Override

@@ -66,6 +66,7 @@ public class Arguments implements JdbiConfig<Arguments> {
     private Arguments(Arguments that) {
         factories.addAll(that.factories);
         untypedNullArgument = that.untypedNullArgument;
+        registry = null;
     }
 
     /**

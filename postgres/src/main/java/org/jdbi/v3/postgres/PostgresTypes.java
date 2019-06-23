@@ -35,6 +35,7 @@ public class PostgresTypes implements JdbiConfig<PostgresTypes> {
 
     private PostgresTypes(PostgresTypes that) {
         this.types.putAll(that.types);
+        registry = null;
     }
 
     @Override

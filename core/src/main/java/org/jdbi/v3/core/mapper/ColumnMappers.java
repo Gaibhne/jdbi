@@ -58,6 +58,7 @@ public class ColumnMappers implements JdbiConfig<ColumnMappers> {
     private ColumnMappers(ColumnMappers that) {
         factories.addAll(that.factories);
         cache.putAll(that.cache);
+        registry = null;
     }
 
     /**
