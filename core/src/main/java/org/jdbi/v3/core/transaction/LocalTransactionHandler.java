@@ -29,7 +29,7 @@ import org.jdbi.v3.core.HandleCallback;
  * directly on the JDBC Connection instance.
  */
 public class LocalTransactionHandler implements TransactionHandler {
-    private final ConcurrentHashMap<Handle, LocalStuff> localStuff = new ConcurrentHashMap<>();
+    private final Map<Handle, LocalStuff> localStuff = new ConcurrentHashMap<>();
     private final ThreadLocal<Boolean> didTxnRollback = ThreadLocal.withInitial(() -> false);
 
     @Override

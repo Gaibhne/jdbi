@@ -15,6 +15,7 @@ package org.jdbi.v3.core.mapper;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -33,7 +34,7 @@ import org.jdbi.v3.meta.Beta;
  */
 public class ColumnMappers implements JdbiConfig<ColumnMappers> {
     private final List<QualifiedColumnMapperFactory> factories = new CopyOnWriteArrayList<>();
-    private final ConcurrentHashMap<QualifiedType<?>, ColumnMapper<?>> cache = new ConcurrentHashMap<>();
+    private final Map<QualifiedType<?>, ColumnMapper<?>> cache = new ConcurrentHashMap<>();
     private ConfigRegistry registry;
 
     public ColumnMappers() {

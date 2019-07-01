@@ -15,6 +15,7 @@ package org.jdbi.v3.core.mapper;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -31,7 +32,7 @@ import org.jdbi.v3.core.statement.Query;
  */
 public class RowMappers implements JdbiConfig<RowMappers> {
     private final List<RowMapperFactory> factories = new CopyOnWriteArrayList<>();
-    private final ConcurrentHashMap<Type, RowMapper<?>> cache = new ConcurrentHashMap<>();
+    private final Map<Type, RowMapper<?>> cache = new ConcurrentHashMap<>();
     private ConfigRegistry registry;
 
     public RowMappers() {
