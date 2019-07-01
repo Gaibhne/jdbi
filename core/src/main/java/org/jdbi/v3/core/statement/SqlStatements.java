@@ -32,6 +32,7 @@ import org.jdbi.v3.meta.Beta;
  */
 public final class SqlStatements implements JdbiConfig<SqlStatements> {
 
+    // cannot be a ConcurrentHashMap because of null keys
     private final Map<String, Object> attributes = Collections.synchronizedMap(new HashMap<>());
     private TemplateEngine templateEngine = new DefinedAttributeTemplateEngine();
     private SqlParser sqlParser = new ColonPrefixSqlParser();
