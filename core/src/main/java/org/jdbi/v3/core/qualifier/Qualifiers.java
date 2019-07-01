@@ -69,6 +69,6 @@ public class Qualifiers implements JdbiConfig<Qualifiers> {
 
     @Override
     public Qualifiers createCopy() {
-        return this;
+        return new Qualifiers();
     }
 }
