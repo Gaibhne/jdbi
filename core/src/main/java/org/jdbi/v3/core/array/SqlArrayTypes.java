@@ -29,12 +29,10 @@ import org.jdbi.v3.core.internal.JdbiOptionals;
  */
 public class SqlArrayTypes implements JdbiConfig<SqlArrayTypes> {
     private final List<SqlArrayTypeFactory> factories = new CopyOnWriteArrayList<>();
-    private SqlArrayArgumentStrategy argumentStrategy;
+    private SqlArrayArgumentStrategy argumentStrategy = SqlArrayArgumentStrategy.SQL_ARRAY;
     private ConfigRegistry registry;
 
     public SqlArrayTypes() {
-        argumentStrategy = SqlArrayArgumentStrategy.SQL_ARRAY;
-
         register(new EnumSqlArrayTypeFactory());
     }
 

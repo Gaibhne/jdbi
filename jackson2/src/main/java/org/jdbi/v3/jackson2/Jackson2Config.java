@@ -22,13 +22,11 @@ import org.jdbi.v3.meta.Beta;
  */
 @Beta
 public class Jackson2Config implements JdbiConfig<Jackson2Config> {
-    private ObjectMapper mapper;
-    private Class<?> serializationView;
-    private Class<?> deserializationView;
+    private ObjectMapper mapper = new ObjectMapper();
+    private Class<?> serializationView = null;
+    private Class<?> deserializationView = null;
 
-    public Jackson2Config() {
-        this.mapper = new ObjectMapper();
-    }
+    public Jackson2Config() {}
 
     private Jackson2Config(Jackson2Config other) {
         this.mapper = other.mapper;

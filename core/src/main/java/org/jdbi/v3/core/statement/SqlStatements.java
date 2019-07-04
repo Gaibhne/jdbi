@@ -32,24 +32,18 @@ import org.jdbi.v3.meta.Beta;
  */
 public final class SqlStatements implements JdbiConfig<SqlStatements> {
 
-    private final Map<String, Object> attributes;
-    private TemplateEngine templateEngine;
-    private SqlParser sqlParser;
-    private SqlLogger sqlLogger;
-    private Integer queryTimeout;
-    private boolean allowUnusedBindings;
+    private final Map<String, Object> attributes = Collections.synchronizedMap(new HashMap<>());
+    private TemplateEngine templateEngine = new DefinedAttributeTemplateEngine();
+    private SqlParser sqlParser = new ColonPrefixSqlParser();
+    private SqlLogger sqlLogger = SqlLogger.NOP_SQL_LOGGER;
+    private Integer queryTimeout = null;
+    private boolean allowUnusedBindings = false;
     private final Collection<StatementCustomizer> customizers = new CopyOnWriteArrayList<>();
 
-    public SqlStatements() {
-        attributes = Collections.synchronizedMap(new HashMap<>());
-        templateEngine = new DefinedAttributeTemplateEngine();
-        sqlParser = new ColonPrefixSqlParser();
-        sqlLogger = SqlLogger.NOP_SQL_LOGGER;
-        queryTimeout = null;
-    }
+    public SqlStatements() {}
 
     private SqlStatements(SqlStatements that) {
-        this.attributes = Collections.synchronizedMap(that.getAttributes()); // already copied
+        this.attributes.putAll(that.getAttributes());
         this.templateEngine = that.templateEngine;
         this.sqlParser = that.sqlParser;
         this.sqlLogger = that.sqlLogger;

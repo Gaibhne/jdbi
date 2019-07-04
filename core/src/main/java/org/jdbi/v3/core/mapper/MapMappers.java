@@ -21,11 +21,9 @@ import org.jdbi.v3.meta.Beta;
 @Beta
 public class MapMappers implements JdbiConfig<MapMappers> {
 
-    private UnaryOperator<String> caseChange;
+    private UnaryOperator<String> caseChange = CaseStrategy.LOCALE_LOWER;
 
-    public MapMappers() {
-        caseChange = CaseStrategy.LOCALE_LOWER;
-    }
+    public MapMappers() {}
 
     private MapMappers(MapMappers that) {
         caseChange = that.caseChange;

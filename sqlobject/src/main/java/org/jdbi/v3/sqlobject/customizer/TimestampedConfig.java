@@ -21,11 +21,9 @@ import org.jdbi.v3.core.config.JdbiConfig;
  * Configuration for {@link Timestamped}.
  */
 public class TimestampedConfig implements JdbiConfig<TimestampedConfig> {
-    private ZoneId timezone;
+    private ZoneId timezone = ZoneId.systemDefault();
 
-    public TimestampedConfig() {
-        timezone = ZoneId.systemDefault();
-    }
+    public TimestampedConfig() {}
 
     private TimestampedConfig(TimestampedConfig other) {
         timezone = other.timezone;
