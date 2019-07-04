@@ -25,12 +25,14 @@ import org.jdbi.v3.core.statement.StatementContext;
  * Commonly used ResultProducer implementations.
  */
 public class ResultProducers implements JdbiConfig<ResultProducers> {
-    private boolean allowNoResults = false;
+    private boolean allowNoResults;
 
-    public ResultProducers() {}
+    public ResultProducers() {
+        allowNoResults = false;
+    }
 
     private ResultProducers(ResultProducers that) {
-        this.allowNoResults = that.allowNoResults;
+        allowNoResults = that.allowNoResults;
     }
 
     /**

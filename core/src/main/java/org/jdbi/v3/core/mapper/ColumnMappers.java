@@ -33,11 +33,14 @@ import org.jdbi.v3.meta.Beta;
  * Configuration registry for {@link ColumnMapperFactory} instances.
  */
 public class ColumnMappers implements JdbiConfig<ColumnMappers> {
-    private final List<QualifiedColumnMapperFactory> factories = new CopyOnWriteArrayList<>();
-    private final Map<QualifiedType<?>, ColumnMapper<?>> cache = new ConcurrentHashMap<>();
+    private final List<QualifiedColumnMapperFactory> factories;
+    private final Map<QualifiedType<?>, ColumnMapper<?>> cache;
     private ConfigRegistry registry;
 
     public ColumnMappers() {
+        factories = new CopyOnWriteArrayList<>();
+        cache = new ConcurrentHashMap<>();
+
         // TODO move to BuiltInSupportPlugin
         register(new SqlArrayMapperFactory());
         register(new JavaTimeMapperFactory());
@@ -57,8 +60,8 @@ public class ColumnMappers implements JdbiConfig<ColumnMappers> {
     }
 
     private ColumnMappers(ColumnMappers that) {
-        factories.addAll(that.factories);
-        cache.putAll(that.cache);
+        factories = new CopyOnWriteArrayList<>(that.factories);
+        cache = new ConcurrentHashMap<>(that.cache);
         registry = null;
     }
 

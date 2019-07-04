@@ -34,13 +34,15 @@ import org.jdbi.v3.meta.Beta;
  * The factories are consulted in reverse order of registration (i.e. last-registered wins).
  */
 public class Arguments implements JdbiConfig<Arguments> {
-    private final List<QualifiedArgumentFactory> factories = new CopyOnWriteArrayList<>();
+    private final List<QualifiedArgumentFactory> factories;
     private ConfigRegistry registry;
-    private Argument untypedNullArgument = new NullArgument(Types.OTHER);
+    private Argument untypedNullArgument;
 
     public Arguments() {
-        // TODO move to BuiltInSupportPlugin
+        factories = new CopyOnWriteArrayList<>();
+        untypedNullArgument = new NullArgument(Types.OTHER);
 
+        // TODO move to BuiltInSupportPlugin
         // the null factory must be interrogated last to preserve types!
         register(new UntypedNullArgumentFactory());
 
@@ -64,7 +66,7 @@ public class Arguments implements JdbiConfig<Arguments> {
     }
 
     private Arguments(Arguments that) {
-        factories.addAll(that.factories);
+        factories = new CopyOnWriteArrayList<>(that.factories);
         untypedNullArgument = that.untypedNullArgument;
         registry = null;
     }

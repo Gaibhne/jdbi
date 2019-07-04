@@ -29,16 +29,18 @@ import org.jdbi.v3.core.internal.JdbiOptionals;
  * method, the last-registered factory takes precedence.
  */
 public class Handlers implements JdbiConfig<Handlers> {
-    private final List<HandlerFactory> factories = new CopyOnWriteArrayList<>();
+    private final List<HandlerFactory> factories;
 
     public Handlers() {
+        factories = new CopyOnWriteArrayList<>();
+
         register(new DefaultMethodHandlerFactory());
         register(new SqlMethodHandlerFactory());
         register(new BridgeMethodHandlerFactory());
     }
 
     private Handlers(Handlers that) {
-        factories.addAll(that.factories);
+        factories = new CopyOnWriteArrayList<>(that.factories);
     }
 
     /**

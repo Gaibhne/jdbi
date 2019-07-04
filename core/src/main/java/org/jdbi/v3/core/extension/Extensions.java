@@ -24,19 +24,21 @@ import org.jdbi.v3.core.config.JdbiConfig;
  * instances.
  */
 public class Extensions implements JdbiConfig<Extensions> {
-    private final List<ExtensionFactory> factories = new CopyOnWriteArrayList<>();
+    private final List<ExtensionFactory> factories;
 
     /**
      * Create an empty {@link ExtensionFactory} configuration.
      */
-    public Extensions() {}
+    public Extensions() {
+        factories = new CopyOnWriteArrayList<>();
+    }
 
     /**
      * Create an extension configuration by cloning another
      * @param that the configuration to clone
      */
     private Extensions(Extensions that) {
-        factories.addAll(that.factories);
+        factories = new CopyOnWriteArrayList<>(that.factories);
     }
 
     /**

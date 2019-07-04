@@ -23,13 +23,15 @@ import org.jdbi.v3.core.config.JdbiConfig;
 import org.jdbi.v3.core.generic.GenericTypes;
 
 public class PojoTypes implements JdbiConfig<PojoTypes> {
-    private final Map<Class<?>, ImmutablesPropertiesFactory> factories = new ConcurrentHashMap<>();
+    private final Map<Class<?>, ImmutablesPropertiesFactory> factories;
     private ConfigRegistry registry;
 
-    public PojoTypes() {}
+    public PojoTypes() {
+        factories = new ConcurrentHashMap<>();
+    }
 
     private PojoTypes(PojoTypes other) {
-        factories.putAll(other.factories);
+        factories = new ConcurrentHashMap<>(other.factories);
         registry = null;
     }
 

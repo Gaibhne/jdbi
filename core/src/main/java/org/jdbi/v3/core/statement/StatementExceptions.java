@@ -24,13 +24,17 @@ import org.jdbi.v3.meta.Beta;
 @Beta
 public class StatementExceptions implements JdbiConfig<StatementExceptions> {
 
-    private MessageRendering messageRendering = MessageRendering.SHORT_STATEMENT;
-    private int lengthLimit = 1024;
+    private MessageRendering messageRendering;
+    private int lengthLimit;
 
-    public StatementExceptions() {}
+    public StatementExceptions() {
+        messageRendering = MessageRendering.SHORT_STATEMENT;
+        lengthLimit = 1024;
+    }
+
     private StatementExceptions(StatementExceptions other) {
-        this.messageRendering = other.messageRendering;
-        this.lengthLimit = other.lengthLimit;
+        messageRendering = other.messageRendering;
+        lengthLimit = other.lengthLimit;
     }
 
     /**

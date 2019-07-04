@@ -23,20 +23,23 @@ import org.jdbi.v3.core.config.JdbiConfig;
  * Configuration class for reflective mappers.
  */
 public class ReflectionMappers implements JdbiConfig<ReflectionMappers> {
-    private final List<ColumnNameMatcher> columnNameMatchers = new CopyOnWriteArrayList<>();
-    private boolean strictMatching = false;
+    private final List<ColumnNameMatcher> columnNameMatchers;
+    private boolean strictMatching;
 
     /**
      * Create a default configuration that attempts case insensitive and
      * snake_case matching for names.
      */
     public ReflectionMappers() {
+        columnNameMatchers = new CopyOnWriteArrayList<>();
+        strictMatching = false;
+
         columnNameMatchers.add(new SnakeCaseColumnNameMatcher());
         columnNameMatchers.add(new CaseInsensitiveColumnNameMatcher());
     }
 
     private ReflectionMappers(ReflectionMappers that) {
-        columnNameMatchers.addAll(that.columnNameMatchers);
+        columnNameMatchers = new CopyOnWriteArrayList<>(that.columnNameMatchers);
         strictMatching = that.strictMatching;
     }
 

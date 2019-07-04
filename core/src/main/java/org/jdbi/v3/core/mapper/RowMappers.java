@@ -31,18 +31,21 @@ import org.jdbi.v3.core.statement.Query;
  * Configuration registry for {@link RowMapperFactory} instances.
  */
 public class RowMappers implements JdbiConfig<RowMappers> {
-    private final List<RowMapperFactory> factories = new CopyOnWriteArrayList<>();
-    private final Map<Type, RowMapper<?>> cache = new ConcurrentHashMap<>();
+    private final List<RowMapperFactory> factories;
+    private final Map<Type, RowMapper<?>> cache;
     private ConfigRegistry registry;
 
     public RowMappers() {
+        factories = new CopyOnWriteArrayList<>();
+        cache = new ConcurrentHashMap<>();
+
         register(MapEntryMapper.factory());
         register(new PojoMapperFactory());
     }
 
     private RowMappers(RowMappers that) {
-        factories.addAll(that.factories);
-        cache.putAll(that.cache);
+        factories = new CopyOnWriteArrayList<>(that.factories);
+        cache = new ConcurrentHashMap<>(that.cache);
         registry = null;
     }
 

@@ -32,13 +32,15 @@ public class TupleMappers implements JdbiConfig<TupleMappers>, MapEntryConfig<Tu
 
     private ConfigRegistry registry;
 
-    private String[] columns = new String[Tuple.MAX_ARITY];
+    private String[] columns;
 
-    public TupleMappers() {}
+    public TupleMappers() {
+        columns = new String[Tuple.MAX_ARITY];
+    }
 
     private TupleMappers(TupleMappers that) {
-        this.columns = Arrays.copyOf(that.columns, Tuple.MAX_ARITY);
-        this.registry = null;
+        columns = Arrays.copyOf(that.columns, Tuple.MAX_ARITY);
+        registry = null;
     }
 
     @Override

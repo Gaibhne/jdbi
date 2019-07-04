@@ -19,12 +19,14 @@ import org.jdbi.v3.meta.Beta;
 
 @Beta
 public class JsonConfig implements JdbiConfig<JsonConfig> {
-    private JsonMapper mapper = new UnimplementedJsonMapper();
+    private JsonMapper mapper;
 
-    public JsonConfig() {}
+    public JsonConfig() {
+        mapper = new UnimplementedJsonMapper();
+    }
 
     private JsonConfig(JsonConfig other) {
-        this.mapper = other.mapper;
+        mapper = other.mapper;
     }
 
     public JsonConfig setJsonMapper(JsonMapper mapper) {

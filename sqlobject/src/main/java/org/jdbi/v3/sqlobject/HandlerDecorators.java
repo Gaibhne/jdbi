@@ -28,14 +28,16 @@ import org.jdbi.v3.core.config.JdbiConfig;
  * decorator will be the outermost decorator around the method handler.
  */
 public class HandlerDecorators implements JdbiConfig<HandlerDecorators> {
-    private final List<HandlerDecorator> decorators = new CopyOnWriteArrayList<>();
+    private final List<HandlerDecorator> decorators;
 
     public HandlerDecorators() {
+        decorators = new CopyOnWriteArrayList<>();
+
         register(new SqlMethodAnnotatedHandlerDecorator());
     }
 
     private HandlerDecorators(HandlerDecorators that) {
-        decorators.addAll(that.decorators);
+        decorators = new CopyOnWriteArrayList<>(that.decorators);
     }
 
     /**

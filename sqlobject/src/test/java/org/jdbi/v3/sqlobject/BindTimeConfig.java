@@ -20,7 +20,9 @@ import org.jdbi.v3.core.config.JdbiConfig;
 public class BindTimeConfig implements JdbiConfig<BindTimeConfig> {
     private Clock clock;
 
-    public BindTimeConfig() {}
+    public BindTimeConfig() {
+        clock = Clock.systemDefaultZone();
+    }
 
     private BindTimeConfig(BindTimeConfig that) {
         clock = that.clock;

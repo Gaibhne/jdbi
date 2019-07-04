@@ -120,12 +120,17 @@ public class SerializableTransactionRunner extends DelegatingTransactionHandler 
         private static final int DEFAULT_MAX_RETRIES = 5;
         private static final Consumer<List<Exception>> NOP = list -> {};
 
-        private int maxRetries = DEFAULT_MAX_RETRIES;
-        private String serializationFailureSqlState = SQLSTATE_TXN_SERIALIZATION_FAILED;
-        private Consumer<List<Exception>> onFailure = NOP;
-        private Consumer<List<Exception>> onSuccess = NOP;
+        private int maxRetries;
+        private String serializationFailureSqlState;
+        private Consumer<List<Exception>> onFailure;
+        private Consumer<List<Exception>> onSuccess;
 
-        public Configuration() {}
+        public Configuration() {
+            maxRetries = DEFAULT_MAX_RETRIES;
+            serializationFailureSqlState = SQLSTATE_TXN_SERIALIZATION_FAILED;
+            onFailure = NOP;
+            onSuccess = NOP;
+        }
 
         private Configuration(Configuration that) {
             maxRetries = that.maxRetries;

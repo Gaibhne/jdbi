@@ -57,10 +57,12 @@ public class TestSqlLocator {
     public static class TestConfig implements JdbiConfig<TestConfig> {
         private String sql;
 
-        public TestConfig() {}
+        public TestConfig() {
+            sql = null;
+        }
 
         private TestConfig(TestConfig that) {
-            this.sql = that.sql;
+            sql = that.sql;
         }
 
         @Override

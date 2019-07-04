@@ -19,12 +19,14 @@ import org.jdbi.v3.core.config.JdbiConfig;
  * Configuration class for handles.
  */
 public class Handles implements JdbiConfig<Handles> {
-    private boolean forceEndTransactions = true;
+    private boolean forceEndTransactions;
 
-    public Handles() {}
+    public Handles() {
+        forceEndTransactions = true;
+    }
 
     private Handles(Handles that) {
-        this.forceEndTransactions = that.forceEndTransactions;
+        forceEndTransactions = that.forceEndTransactions;
     }
 
     /**

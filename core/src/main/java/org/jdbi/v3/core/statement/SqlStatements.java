@@ -33,24 +33,32 @@ import org.jdbi.v3.meta.Beta;
 public final class SqlStatements implements JdbiConfig<SqlStatements> {
 
     // cannot be a ConcurrentHashMap because of null keys
-    private final Map<String, Object> attributes = Collections.synchronizedMap(new HashMap<>());
-    private TemplateEngine templateEngine = new DefinedAttributeTemplateEngine();
-    private SqlParser sqlParser = new ColonPrefixSqlParser();
-    private SqlLogger sqlLogger = SqlLogger.NOP_SQL_LOGGER;
-    private Integer queryTimeout = null;
-    private boolean allowUnusedBindings = false;
-    private final Collection<StatementCustomizer> customizers = new CopyOnWriteArrayList<>();
+    private final Map<String, Object> attributes;
+    private TemplateEngine templateEngine;
+    private SqlParser sqlParser;
+    private SqlLogger sqlLogger;
+    private Integer queryTimeout;
+    private boolean allowUnusedBindings;
+    private final Collection<StatementCustomizer> customizers;
 
-    public SqlStatements() {}
+    public SqlStatements() {
+        attributes = Collections.synchronizedMap(new HashMap<>());
+        templateEngine = new DefinedAttributeTemplateEngine();
+        sqlParser = new ColonPrefixSqlParser();
+        sqlLogger = SqlLogger.NOP_SQL_LOGGER;
+        queryTimeout = null;
+        allowUnusedBindings = false;
+        customizers = new CopyOnWriteArrayList<>();
+    }
 
     private SqlStatements(SqlStatements that) {
-        this.attributes.putAll(that.getAttributes());
-        this.templateEngine = that.templateEngine;
-        this.sqlParser = that.sqlParser;
-        this.sqlLogger = that.sqlLogger;
-        this.queryTimeout = that.queryTimeout;
-        this.allowUnusedBindings = that.allowUnusedBindings;
-        this.customizers.addAll(that.customizers);
+        attributes = Collections.synchronizedMap(new HashMap<>(that.getAttributes()));
+        templateEngine = that.templateEngine;
+        sqlParser = that.sqlParser;
+        sqlLogger = that.sqlLogger;
+        queryTimeout = that.queryTimeout;
+        allowUnusedBindings = that.allowUnusedBindings;
+        customizers = new CopyOnWriteArrayList<>(that.customizers);
     }
 
     /**

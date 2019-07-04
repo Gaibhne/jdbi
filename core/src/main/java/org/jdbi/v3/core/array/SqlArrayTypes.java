@@ -28,16 +28,19 @@ import org.jdbi.v3.core.internal.JdbiOptionals;
  * Configuration class for SQL array binding and mapping.
  */
 public class SqlArrayTypes implements JdbiConfig<SqlArrayTypes> {
-    private final List<SqlArrayTypeFactory> factories = new CopyOnWriteArrayList<>();
-    private SqlArrayArgumentStrategy argumentStrategy = SqlArrayArgumentStrategy.SQL_ARRAY;
+    private final List<SqlArrayTypeFactory> factories;
+    private SqlArrayArgumentStrategy argumentStrategy;
     private ConfigRegistry registry;
 
     public SqlArrayTypes() {
+        factories = new CopyOnWriteArrayList<>();
+        argumentStrategy = SqlArrayArgumentStrategy.SQL_ARRAY;
+
         register(new EnumSqlArrayTypeFactory());
     }
 
     private SqlArrayTypes(SqlArrayTypes that) {
-        factories.addAll(that.factories);
+        factories = new CopyOnWriteArrayList<>(that.factories);
         argumentStrategy = that.argumentStrategy;
         registry = null;
     }

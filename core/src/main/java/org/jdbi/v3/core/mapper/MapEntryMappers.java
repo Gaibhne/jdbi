@@ -22,7 +22,10 @@ public class MapEntryMappers implements JdbiConfig<MapEntryMappers>, MapEntryCon
     private String keyColumn;
     private String valueColumn;
 
-    public MapEntryMappers() {}
+    public MapEntryMappers() {
+        keyColumn = null;
+        valueColumn = null;
+    }
 
     private MapEntryMappers(MapEntryMappers that) {
         this.keyColumn = that.keyColumn;

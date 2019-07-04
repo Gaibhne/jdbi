@@ -22,7 +22,10 @@ public class SqlObjectStatementConfiguration implements JdbiConfig<SqlObjectStat
     private Supplier<Object> returner;
     private Object[] args;
 
-    public SqlObjectStatementConfiguration() {}
+    public SqlObjectStatementConfiguration() {
+        returner = null;
+        args = null;
+    }
 
     private SqlObjectStatementConfiguration(SqlObjectStatementConfiguration other) {
         this.returner = other.returner;

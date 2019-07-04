@@ -27,14 +27,16 @@ import org.postgresql.util.PGobject;
  * Handler for PostgreSQL custom types.
  */
 public class PostgresTypes implements JdbiConfig<PostgresTypes> {
-    private final Map<Class<? extends PGobject>, String> types = new ConcurrentHashMap<>();
+    private final Map<Class<? extends PGobject>, String> types;
     private ConfigRegistry registry;
 
     @SuppressWarnings("unused")
-    public PostgresTypes() {}
+    public PostgresTypes() {
+        types = new ConcurrentHashMap<>();
+    }
 
     private PostgresTypes(PostgresTypes that) {
-        this.types.putAll(that.types);
+        types = new ConcurrentHashMap<>(that.types);
         registry = null;
     }
 

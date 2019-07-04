@@ -22,12 +22,14 @@ import org.jdbi.v3.meta.Beta;
  */
 @Beta
 public class Gson2Config implements JdbiConfig<Gson2Config> {
-    private Gson gson = new Gson();
+    private Gson gson;
 
-    public Gson2Config() {}
+    public Gson2Config() {
+        gson = new Gson();
+    }
 
     private Gson2Config(Gson2Config other) {
-        this.gson = other.gson;
+        gson = other.gson;
     }
 
     /**
