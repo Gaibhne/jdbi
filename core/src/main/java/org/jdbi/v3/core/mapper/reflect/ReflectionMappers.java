@@ -13,10 +13,9 @@
  */
 package org.jdbi.v3.core.mapper.reflect;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.jdbi.v3.core.config.JdbiConfig;
 
@@ -24,22 +23,20 @@ import org.jdbi.v3.core.config.JdbiConfig;
  * Configuration class for reflective mappers.
  */
 public class ReflectionMappers implements JdbiConfig<ReflectionMappers> {
-    private List<ColumnNameMatcher> columnNameMatchers;
-    private boolean strictMatching;
+    private final List<ColumnNameMatcher> columnNameMatchers = new CopyOnWriteArrayList<>();
+    private boolean strictMatching = false;
 
     /**
      * Create a default configuration that attempts case insensitive and
      * snake_case matching for names.
      */
     public ReflectionMappers() {
-        columnNameMatchers = Arrays.asList(
-                new CaseInsensitiveColumnNameMatcher(),
-                new SnakeCaseColumnNameMatcher());
-        strictMatching = false;
+        columnNameMatchers.add(new SnakeCaseColumnNameMatcher());
+        columnNameMatchers.add(new CaseInsensitiveColumnNameMatcher());
     }
 
     private ReflectionMappers(ReflectionMappers that) {
-        columnNameMatchers = new ArrayList<>(that.columnNameMatchers);
+        columnNameMatchers.addAll(that.columnNameMatchers);
         strictMatching = that.strictMatching;
     }
 
@@ -56,7 +53,8 @@ public class ReflectionMappers implements JdbiConfig<ReflectionMappers> {
      * @return this
      */
     public ReflectionMappers setColumnNameMatchers(List<ColumnNameMatcher> columnNameMatchers) {
-        this.columnNameMatchers = new ArrayList<>(columnNameMatchers);
+        this.columnNameMatchers.clear();
+        this.columnNameMatchers.addAll(columnNameMatchers);
         return this;
     }
 
